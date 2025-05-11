@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+// Указываем путь Go-пакета
+option go_package = "github.com/StepOne-ai/vk_internship/proto/gen";
+
+// Определение сервиса
+service PubSub {
+  rpc Subscribe(SubscribeRequest) returns (stream Event);
+  rpc Publish(PublishRequest) returns (google.protobuf.Empty);
+}
+
+// Сообщения
+message SubscribeRequest {
+  string key = 1;
+}
+
+message PublishRequest {
+  string key = 1;
+  string data = 2;
+}
+
+message Event {
+  string data = 1;
+}
